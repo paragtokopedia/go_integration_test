@@ -39,7 +39,7 @@ func setupDatabase() {
 	database := os.Getenv("MYSQL_DB")
 
 	databaseUri := user+"@tcp("+host+")/"+database
-	log.Println(databaseUri)
+
 	db, err = sql.Open("mysql", databaseUri)
 	if err !=nil{
 		log.Fatal(err)
