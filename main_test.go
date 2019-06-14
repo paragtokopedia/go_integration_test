@@ -49,7 +49,7 @@ func Test_GetUserByID(t *testing.T) {
 		t.SkipNow()
 	}
 
-	data, err := GetUserByID(context.Background(), 2,db)
+	data, err := GetUserByID(context.Background(), 1,db)
 	if err !=nil{
 		t.Error(err)
 	}else{
