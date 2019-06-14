@@ -46,9 +46,9 @@ jobs:
             echo Failed waiting for MySQL && exit 1
       - run:
           name: Setup DB
-          command: mysql -u root < files/init.sql
+          command: mysql -u root < files/database/init.sql
       - run:
           name: Populate Test data
-          command: mysql -u root < files/test_data.sql
+          command: mysql -u root < files/database/test_data.sql
 
       - run: go test -integration -v ./...
