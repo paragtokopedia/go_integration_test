@@ -44,7 +44,7 @@ jobs:
               sleep 1
             done
             echo Failed waiting for MySQL && exit 1
-      - run: sudo apt-get update && apt-get install -y mysql-client
+      - run: sudo apt-get update && sudo apt-get install -y mysql-client
       - run:
           name: Setup DB
           command: mysql -u root < files/database/init.sql
