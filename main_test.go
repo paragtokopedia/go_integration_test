@@ -42,6 +42,10 @@ func tearDown()  {
 }
 
 func Test_GetUserByID(t *testing.T) {
+	if !*integration{
+		t.SkipNow()
+	}
+
 	data, err := GetUserByID(context.Background(), 1,db)
 	if err !=nil{
 		t.Error(err)
