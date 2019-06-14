@@ -45,7 +45,7 @@ func InitDatabase() {
 }
 
 func GetUserByID(ctx context.Context, id int64, db *sql.DB) ([]User, error) {
-	results, err := db.QueryContext(ctx,"select * from user where id = ?",id)
+	results, err := db.QueryContext(ctx,"select * from users where id = ?",id)
 
 	if err !=nil{
 		return nil, err
