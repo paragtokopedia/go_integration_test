@@ -34,7 +34,13 @@ func TestMain(m *testing.M) {
 
 func setupDatabase() {
 	var err error
-	db, err = sql.Open("mysql", "root@tcp(127.0.0.1:3306)/test")
+	user := os.Getenv("MYSQL_USER")
+	host := os.Getenv("MYSQL_HOST")
+	database := os.Getenv("MYSQL_DB")
+
+	databaseUri := user+"@tcp("+host+")/"+database
+	log.Println(databaseUri)
+	db, err = sql.Open("mysql", databaseUri)
 	if err !=nil{
 		log.Fatal(err)
 	}
