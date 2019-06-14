@@ -7,7 +7,16 @@ jobs:
     docker:
       # specify the version
       - image: circleci/golang:1.9
+        environment:
+           MYSQL_HOST: 127.0.0.1
+           MYSQL_DB: test
+           MYSQL_USER: root
+           MYSQL_ALLOW_EMPTY_PASSWORD: true
+           MYSQL_PASSWORD:
       - image: circleci/mysql:5.7
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     working_directory: /go/src/github.com/paragtokopedia/go_integration_test
     steps:
@@ -35,5 +44,11 @@ jobs:
               sleep 1
             done
             echo Failed waiting for MySQL && exit 1
+      -run:
+          name: Setup DB
+          commmand: mysql -u root < files/init.sql
+      -run:
+          name: Populate Test data
+          commmand: mysql -u root < files/test_data.sql
 
       - run: go test -integration -v ./...
