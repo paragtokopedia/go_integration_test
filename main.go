@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"context"
 	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var databaseInstance *sql.DB
