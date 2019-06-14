@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"context"
+	"os"
 )
 
 var integration = flag.Bool("integration", false, "run database integration tests")
@@ -22,11 +23,13 @@ func TestMain(m *testing.M) {
 		log.Println("Not running Integration Test")
 	}
 
-	m.Run()
+	code := m.Run()
 
 	if *integration {
 		tearDown()
 	}
+
+	os.Exit(code)
 }
 
 func setupDatabase() {
@@ -46,7 +49,7 @@ func Test_GetUserByID(t *testing.T) {
 		t.SkipNow()
 	}
 
-	data, err := GetUserByID(context.Background(), 1,db)
+	data, err := GetUserByID(context.Background(), 2,db)
 	if err !=nil{
 		t.Error(err)
 	}else{
