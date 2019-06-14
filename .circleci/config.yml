@@ -44,11 +44,11 @@ jobs:
               sleep 1
             done
             echo Failed waiting for MySQL && exit 1
-      #- run:
-      #    name: Setup DB
-      #    commmand: mysql -u root < files/init.sql
-      #- run:
-      #    name: Populate Test data
-      #    commmand: mysql -u root < files/test_data.sql
+      - run:
+          name: Setup DB
+          command: mysql -u root < files/init.sql
+      - run:
+          name: Populate Test data
+          command: mysql -u root < files/test_data.sql
 
       - run: go test -integration -v ./...
