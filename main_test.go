@@ -18,21 +18,19 @@ func TestMain(m *testing.M) {
 
 	if *integration {
 		log.Println("Running Integration Test")
-		setupDatabase()
-	} else {
-		log.Println("Not running Integration Test")
+		setup()
 	}
-
 	code := m.Run()
 
 	if *integration {
+		log.Println("Tearing down")
 		tearDown()
 	}
 
 	os.Exit(code)
 }
 
-func setupDatabase() {
+func setup() {
 	var err error
 	user := os.Getenv("MYSQL_USER")
 	host := os.Getenv("MYSQL_HOST")
